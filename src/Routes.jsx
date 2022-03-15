@@ -1,41 +1,41 @@
-import React from 'react';
-import { withRouter, Route, Switch } from 'react-router-dom';
-import { compose } from 'recompose';
-import { connect } from 'react-redux';
-import { isAuthenticated } from './store/action/index';
-import PrivateRoute from './store/util/privateRoute';
+import React from "react";
+import { withRouter, Route, Switch } from "react-router-dom";
+import { compose } from "recompose";
+import { connect } from "react-redux";
+import { isAuthenticated } from "./store/action/index";
+import PrivateRoute from "./store/util/privateRoute";
 
-import LandingPage from './component/Main/LandingPage';
-import Login from './component/Main/Auth/login';
-import ForgotPassword from './component/Main/Auth/fpassword';
-import RegistrationForm from './component/Main/Auth/register';
-import Create from './component/Main/Project/Create';
-import Manage from './component/Main/Project/Manage/index';
-import Calendar from './component/Main/Calendar/index';
-import Profile from './component/Main/Profile/Profile';
-import Account from './component/Main/Settings/Account';
-import Admin from './component/Main/Admin';
-import MyProjects from './component/Main/Project';
-import UserList from './component/Main/Admin/Users';
-import EditUser from './component/Main/Admin/Users/Manage';
-import Logs from './component/Main/Admin/Logs';
+import LandingPage from "./component/Main/LandingPage";
+import Login from "./component/Main/Auth/login";
+import ForgotPassword from "./component/Main/Auth/fpassword";
+import RegistrationForm from "./component/Main/Auth/register";
+import Create from "./component/Main/Project/Create";
+import Manage from "./component/Main/Project/Manage/index";
+import Calendar from "./component/Main/Calendar/index";
+import Profile from "./component/Main/Profile/Profile";
+import Account from "./component/Main/Settings/Account";
+import Admin from "./component/Main/Admin";
+import MyProjects from "./component/Main/Project";
+import UserList from "./component/Main/Admin/Users";
+import EditUser from "./component/Main/Admin/Users/Manage";
+import Logs from "./component/Main/Admin/Logs";
 
 const userLevelNames = {
-  csm: 'Costumer',
-  emp: 'Employee',
-  owner: 'Owner'
+  csm: "Costumer",
+  emp: "Employee",
+  owner: "Owner",
 };
 
 const { csm, emp, owner } = userLevelNames;
 
-const Routes = props => {
+const Routes = (props) => {
   const { isAccessibleFor } = props;
 
   return (
     <Switch>
       <Route path={`/login`} component={Login} />
       <Route path={`/register`} component={RegistrationForm} />
-      <Route path={'/fpassword'} component={ForgotPassword} />
+      <Route path={"/fpassword"} component={ForgotPassword} />
       <PrivateRoute
         exact
         path={`/profile`}
@@ -49,46 +49,46 @@ const Routes = props => {
         accessFunction={() => isAccessibleFor([csm, emp, owner])}
       />
       <PrivateRoute
-        path={'/calendar'}
+        path={"/calendar"}
         component={Calendar}
         accessFunction={() => isAccessibleFor([csm, owner])}
       />
       <PrivateRoute
-        path={'/create'}
+        path={"/create"}
         component={Create}
         accessFunction={() => isAccessibleFor([csm, owner])}
       />
       <PrivateRoute
-        path={'/projects'}
+        path={"/projects"}
         component={MyProjects}
         accessFunction={() => isAccessibleFor([csm, owner])}
       />
       <PrivateRoute
-        path={'/admin'}
+        path={"/admin"}
         component={Admin}
         accessFunction={() => isAccessibleFor([owner])}
       />
       <PrivateRoute
         exact
-        path={'/users'}
+        path={"/users"}
         component={UserList}
         accessFunction={() => isAccessibleFor([owner])}
       />
       <PrivateRoute
         exact
-        path={'/users/manage/:userId'}
+        path={"/users/manage/:userId"}
         component={EditUser}
         accessFunction={() => isAccessibleFor([owner])}
       />
       <PrivateRoute
         exact
-        path={'/logs'}
+        path={"/logs"}
         component={Logs}
         accessFunction={() => isAccessibleFor([owner])}
       />
       <PrivateRoute
         exact
-        path={'/manage/:project_id'}
+        path={"/manage/:project_id"}
         component={Manage}
         accessFunction={() => isAccessibleFor([csm, emp, owner])}
       />
@@ -100,13 +100,13 @@ const Routes = props => {
 
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
-    authUser: state.authUser
+    authUser: state.authUser,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    isAccessibleFor: props => dispatch(isAuthenticated(props))
+    isAccessibleFor: (props) => dispatch(isAuthenticated(props)),
   };
 };
 
