@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import { BrowserRouter } from "react-router-dom";
+// import { connect } from 'react-redux';
+import { compose } from "recompose";
+import { ToastContainer } from "react-toastify";
+
+import { withStore } from "./store";
+import "./App.scss";
+
+import Header from "./component/Main/Header";
+import Routes from "./Routes";
+import FooterComponent from "./component/Main/Footer";
+
+// Material Icons
+import "material-design-icons-iconfont";
+
+// Font awesome icons
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoReplaceSvg = "nest";
+require("@fortawesome/fontawesome-free/js/all");
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer autoClose={3000} />
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Header />
+        <Routes />
+        <FooterComponent />
+      </BrowserRouter>
+    </>
   );
-}
+};
 
-export default App;
+export default compose(withStore)(App);
