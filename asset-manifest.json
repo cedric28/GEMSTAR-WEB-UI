@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/GEMSTAR-WEB-UI/static/css/main.731e9046.css",
+    "main.js": "/GEMSTAR-WEB-UI/static/js/main.2c938bd7.js",
+    "static/js/787.4d19443e.chunk.js": "/GEMSTAR-WEB-UI/static/js/787.4d19443e.chunk.js",
+    "static/media/MaterialIcons-Regular.ttf": "/GEMSTAR-WEB-UI/static/media/MaterialIcons-Regular.24a6611c28f373a0e1d7.ttf",
+    "static/media/MaterialIcons-Regular.woff": "/GEMSTAR-WEB-UI/static/media/MaterialIcons-Regular.824b570fb059ee0a44a9.woff",
+    "static/media/isuzu.jpg": "/GEMSTAR-WEB-UI/static/media/isuzu.dad72864a569615268d5.jpg",
+    "static/media/MaterialIcons-Regular.eot": "/GEMSTAR-WEB-UI/static/media/MaterialIcons-Regular.28d729e6d7a187ee4978.eot",
+    "static/media/MaterialIcons-Regular.woff2": "/GEMSTAR-WEB-UI/static/media/MaterialIcons-Regular.97b9b1857a2af7322eba.woff2",
+    "static/media/honda.jpg": "/GEMSTAR-WEB-UI/static/media/honda.d112be925682eade4823.jpg",
+    "static/media/logo.png": "/GEMSTAR-WEB-UI/static/media/logo.e8cc411d261533d262a8.png",
+    "static/media/kia.jpg": "/GEMSTAR-WEB-UI/static/media/kia.8a7dc2f4e0a71465e127.jpg",
+    "index.html": "/GEMSTAR-WEB-UI/index.html",
+    "main.731e9046.css.map": "/GEMSTAR-WEB-UI/static/css/main.731e9046.css.map",
+    "main.2c938bd7.js.map": "/GEMSTAR-WEB-UI/static/js/main.2c938bd7.js.map",
+    "787.4d19443e.chunk.js.map": "/GEMSTAR-WEB-UI/static/js/787.4d19443e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.731e9046.css",
+    "static/js/main.2c938bd7.js"
+  ]
+}
