@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Badge,
   Button,
@@ -6,9 +6,9 @@ import {
   Col,
   Form,
   ListGroup,
-  Row
-} from 'react-bootstrap';
-import { connect } from 'react-redux';
+  Row,
+} from "react-bootstrap";
+import { connect } from "react-redux";
 
 import {
   assignEmployee,
@@ -19,19 +19,19 @@ import {
   createQoutationServices,
   finalizeQoutation,
   showQoutationToClient,
-  getEmployeeList
-} from '../../../../store/action';
-import { dateFormatting } from './../../../Shared/Helpers/dateFormat';
-import MainBody from '../../../UI/MainBody';
-import Comment from './comment';
-import CreateQuotation from './CreateQuotation';
-import UpdateQuotation from './UpdateQuotation';
-import ViewQuotation from './ViewQuotation';
-import ViewBillingInvoice from './Billing';
-import ViewSaleInvoice from './Invoice';
-import OfficialReceipt from './Official';
+  getEmployeeList,
+} from "../../../../store/action";
+import { dateFormatting } from "./../../../Shared/Helpers/dateFormat";
+import MainBody from "../../../UI/MainBody";
+import Comment from "./comment";
+import CreateQuotation from "./CreateQuotation";
+import UpdateQuotation from "./UpdateQuotation";
+import ViewQuotation from "./ViewQuotation";
+import ViewBillingInvoice from "./Billing";
+import ViewSaleInvoice from "./Invoice";
+import OfficialReceipt from "./Official";
 
-const ManageModule = props => {
+const ManageModule = (props) => {
   const projectId = props.match.params.project_id;
   const {
     assignEmployee,
@@ -46,7 +46,7 @@ const ManageModule = props => {
     finalizeQoutation,
     showQoutationToClient,
     getEmployeeList,
-    services
+    services,
   } = props;
   const [projectDetails, setProjectDetails] = useState({});
   const [projectFiles, setProjectFiles] = useState([]);
@@ -60,9 +60,9 @@ const ManageModule = props => {
   const [showViewSaleInvoice, setShowViewSaleInvoice] = useState(false);
   const [showOfficialReceipt, setShowOfficialReceipt] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState('');
+  const [selectedEmployee, setSelectedEmployee] = useState("");
 
-  const handleSelectChange = e => {
+  const handleSelectChange = (e) => {
     const { value } = e.target;
     setSelectedEmployee(value);
   };
@@ -90,7 +90,7 @@ const ManageModule = props => {
     project.projectFiles,
     project.projectQuotation,
     projectId,
-    isLoaded
+    isLoaded,
   ]);
 
   const qoutationStatusReturn = {
@@ -102,9 +102,10 @@ const ManageModule = props => {
           finalizeQoutation({
             projectId,
             project_qoutation_detail_id:
-              projectQuotation.project_qoutation_detail_id
+              projectQuotation.project_qoutation_detail_id,
           })
-        }>
+        }
+      >
         Accept Offer
       </Button>
     ),
@@ -112,7 +113,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="primary"
-        onClick={() => setShowCreateQuotation(true)}>
+        onClick={() => setShowCreateQuotation(true)}
+      >
         Create Quotation
       </Button>
     ),
@@ -120,7 +122,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="cancel"
-        onClick={() => setShowCreateQuotation(true)}>
+        onClick={() => setShowCreateQuotation(true)}
+      >
         Decline Offer
       </Button>
     ),
@@ -128,7 +131,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="primary"
-        onClick={() => setShowUpdateQuotation(true)}>
+        onClick={() => setShowUpdateQuotation(true)}
+      >
         Update Quotation
       </Button>
     ),
@@ -136,7 +140,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="primary"
-        onClick={() => setShowViewQuotation(true)}>
+        onClick={() => setShowViewQuotation(true)}
+      >
         View Quotation
       </Button>
     ),
@@ -144,7 +149,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="primary"
-        onClick={() => setShowViewBillingInvoice(true)}>
+        onClick={() => setShowViewBillingInvoice(true)}
+      >
         View Billing Invoice
       </Button>
     ),
@@ -152,7 +158,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="primary"
-        onClick={() => setShowViewSaleInvoice(true)}>
+        onClick={() => setShowViewSaleInvoice(true)}
+      >
         View Sale Invoice
       </Button>
     ),
@@ -160,7 +167,8 @@ const ManageModule = props => {
       <Button
         className="my-1 mx-1"
         variant="primary"
-        onClick={() => setShowOfficialReceipt(true)}>
+        onClick={() => setShowOfficialReceipt(true)}
+      >
         View Official Receipt
       </Button>
     ),
@@ -168,12 +176,12 @@ const ManageModule = props => {
       <h5 className="border py-3 text-center">
         Quotation was not yet created by the owner
       </h5>
-    )
+    ),
   };
 
   const qoutationStatus = () => {
     if (Object.keys(projectQuotation).length > 0) {
-      if (user_level_acc === 'owner') {
+      if (user_level_acc === "owner") {
         return (
           <>
             {qoutationStatusReturn.viewQoutation()}
@@ -208,7 +216,7 @@ const ManageModule = props => {
         return qoutationStatusReturn.notCreated();
       }
     } else {
-      if (user_level_acc === 'owner') {
+      if (user_level_acc === "owner") {
         return qoutationStatusReturn.createQuotation();
       } else {
         return qoutationStatusReturn.notCreated();
@@ -292,7 +300,7 @@ const ManageModule = props => {
               Date Created:
             </Col>
             <Col xs={12} sm={8} className="my-0">
-              {dateFormatting(projectDetails.date_created, 'mdy')}
+              {dateFormatting(projectDetails.date_created, "mdy")}
             </Col>
           </Row>
 
@@ -303,11 +311,12 @@ const ManageModule = props => {
             <Col xs={12} sm={8} className="my-0">
               <div
                 className={`fw-normal text-muted ${
-                  projectDetails.project_description && 'border'
+                  projectDetails.project_description && "border"
                 } p-2 mb-2`}
                 dangerouslySetInnerHTML={{
-                  __html: projectDetails.project_description
-                }}></div>
+                  __html: projectDetails.project_description,
+                }}
+              ></div>
             </Col>
           </Row>
 
@@ -322,13 +331,15 @@ const ManageModule = props => {
                   return (
                     <ListGroup.Item
                       key={`file-${index}`}
-                      className="d-flex justify-content-between">
+                      className="d-flex justify-content-between"
+                    >
                       <p className="mb-0">{res.original_file_name}</p>
 
                       <div>
                         <a
                           href={`${process.env.REACT_APP_API_ENDPOINT}/project/download/${projectId}/${res.file_name}`}
-                          download>
+                          download
+                        >
                           <i className="fas fa-file-download badge bg-primary rounded-pill" />
                         </a>
                       </div>
@@ -354,7 +365,7 @@ const ManageModule = props => {
             </Col>
           </Row>
 
-          {user_level_acc === 'owner' &&
+          {user_level_acc === "owner" &&
           projectQuotation &&
           projectQuotation.is_final === 1 ? (
             <>
@@ -368,7 +379,7 @@ const ManageModule = props => {
                 <Col xs={12} md={8}>
                   {projectDetails.emp_first_name
                     ? `${projectDetails.emp_last_name}, ${projectDetails.emp_first_name} ${projectDetails.emp_middle_name}`
-                    : 'No Employee Assigned'}
+                    : "No Employee Assigned"}
                 </Col>
               </Row>
               <Row className="mx-2">
@@ -376,24 +387,26 @@ const ManageModule = props => {
                   <Form.Group
                     as={Col}
                     className="mb-2"
-                    controlId="formBasicFirstName">
+                    controlId="formBasicFirstName"
+                  >
                     <Form.Label className="mb-0">Add Employee: </Form.Label>
                     <Form.Select
                       defaultValue="0"
                       onChange={handleSelectChange}
-                      required>
+                      required
+                    >
                       <option value="0" disabled>
                         Select Employee
                       </option>
                       {usersList.length > 0
-                        ? usersList.map(res => {
+                        ? usersList.map((res) => {
                             return (
                               <option value={`${res.users_id}`}>
                                 {res.first_name} {res.last_name}
                               </option>
                             );
                           })
-                        : ''}
+                        : ""}
                     </Form.Select>
                   </Form.Group>
                   <Button
@@ -403,14 +416,15 @@ const ManageModule = props => {
                         projectDetails.project_id,
                         selectedEmployee
                       )
-                    }>
+                    }
+                  >
                     Assign Employee
                   </Button>
                 </Col>
               </Row>
             </>
           ) : (
-            ''
+            ""
           )}
         </>
       ) : (
@@ -420,31 +434,32 @@ const ManageModule = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     usersList: state.usersList,
     user_level_acc: state.auth.user_level_acc,
     project: state.project,
-    services: state.services
+    services: state.services,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     assignEmployee: (projectId, employee_id) =>
       dispatch(assignEmployee(projectId, employee_id)),
-    getProjectsDetails: projectId => dispatch(getProjectsDetails(projectId)),
-    createProjectComment: commentData =>
+    getProjectsDetails: (projectId) => dispatch(getProjectsDetails(projectId)),
+    createProjectComment: (commentData) =>
       dispatch(createProjectComment(commentData)),
-    createQoutationDetails: projectData =>
+    createQoutationDetails: (projectData) =>
       dispatch(createQoutationDetails(projectData)),
-    createQoutationServices: projectData =>
+    createQoutationServices: (projectData) =>
       dispatch(createQoutationServices(projectData)),
-    finalizeQoutation: projectData => dispatch(finalizeQoutation(projectData)),
-    showQoutationToClient: projectData =>
+    finalizeQoutation: (projectData) =>
+      dispatch(finalizeQoutation(projectData)),
+    showQoutationToClient: (projectData) =>
       dispatch(showQoutationToClient(projectData)),
     fetchServices: () => dispatch(fetchServices()),
-    getEmployeeList: () => dispatch(getEmployeeList())
+    getEmployeeList: () => dispatch(getEmployeeList()),
   };
 };
 
