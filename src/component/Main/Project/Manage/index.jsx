@@ -20,6 +20,7 @@ import {
   finalizeQoutation,
   showQoutationToClient,
   getEmployeeList,
+  createProjectStatus,
 } from "../../../../store/action";
 import { dateFormatting } from "./../../../Shared/Helpers/dateFormat";
 import MainBody from "../../../UI/MainBody";
@@ -30,6 +31,7 @@ import ViewQuotation from "./ViewQuotation";
 import ViewBillingInvoice from "./Billing";
 import ViewSaleInvoice from "./Invoice";
 import OfficialReceipt from "./Official";
+import ProjectHistory from "./projectHistory";
 
 const ManageModule = (props) => {
   const projectId = props.match.params.project_id;
@@ -42,6 +44,7 @@ const ManageModule = (props) => {
     createProjectComment,
     createQoutationDetails,
     createQoutationServices,
+    createProjectStatus,
     fetchServices,
     finalizeQoutation,
     showQoutationToClient,
@@ -426,6 +429,12 @@ const ManageModule = (props) => {
           ) : (
             ""
           )}
+
+          <ProjectHistory
+            user_level_acc={user_level_acc}
+            createProjectStatus={createProjectStatus}
+            projectId={projectDetails.project_id}
+          />
         </>
       ) : (
         <h5 className="border py-3 text-center">NoData</h5>
@@ -447,6 +456,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     assignEmployee: (projectId, employee_id) =>
       dispatch(assignEmployee(projectId, employee_id)),
+    createProjectStatus: (projectId, remarks, statusId) =>
+      dispatch(createProjectStatus(projectId, remarks, statusId)),
     getProjectsDetails: (projectId) => dispatch(getProjectsDetails(projectId)),
     createProjectComment: (commentData) =>
       dispatch(createProjectComment(commentData)),

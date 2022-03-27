@@ -1,176 +1,194 @@
-import { projectActionType } from '../../constants/actionType';
-import { axiosInstance } from '../../util/axios';
+import { projectActionType } from "../../constants/actionType";
+import { axiosInstance } from "../../util/axios";
 
-export const createProject = projectData => (dispatch /* , getState */) => {
-  return axiosInstance('post', '/project/create', projectData)
-    .then(res => res.data)
-    .then(res => {
+export const createProject = (projectData) => (dispatch /* , getState */) => {
+  return axiosInstance("post", "/project/create", projectData)
+    .then((res) => res.data)
+    .then((res) => {
       // if (res.success) {
       //   dispatch({ type: servicesActionType.MERGE_SERVICES, data: res.data });
       // }
       return res.success;
     })
-    .catch(err => {
+    .catch((err) => {
+      return err.response.data;
+    });
+};
+
+export const createProjectStatus = (projectId, statusId, remarks) => {
+  return axiosInstance("post", `/project/status/${projectId}/create`, {
+    remarks,
+    statusId,
+  })
+    .then((res) => res.data)
+    .then((res) => {
+      // if (res.success) {
+      //   dispatch({ type: servicesActionType.MERGE_SERVICES, data: res.data });
+      // }
+      return res.success;
+    })
+    .catch((err) => {
       return err.response.data;
     });
 };
 
 export const createProjectComment =
-  projectData => (dispatch /* , getState */) => {
-    return axiosInstance('post', '/project/comment/create', projectData)
-      .then(res => res.data)
-      .then(res => {
+  (projectData) => (dispatch /* , getState */) => {
+    return axiosInstance("post", "/project/comment/create", projectData)
+      .then((res) => res.data)
+      .then((res) => {
         if (res.success) {
           dispatch({
             type: projectActionType.MERGE_PROJECT_COMMENT,
-            projectComments: res.projectComments
+            projectComments: res.projectComments,
           });
         }
         return res.success;
       })
-      .catch(err => {
+      .catch((err) => {
         return err.response.data;
       });
   };
 
 export const createQoutationDetails =
-  projectData => (dispatch /* , getState */) => {
-    return axiosInstance('post', '/project/qoutation/detail', projectData)
-      .then(res => res.data)
-      .then(res => {
+  (projectData) => (dispatch /* , getState */) => {
+    return axiosInstance("post", "/project/qoutation/detail", projectData)
+      .then((res) => res.data)
+      .then((res) => {
         if (res.success) {
           dispatch({
             type: projectActionType.MERGE_PROJECT_QOUTATION,
-            data: res.data
+            data: res.data,
           });
         }
         return res.success;
       })
-      .catch(err => {
+      .catch((err) => {
         return err.response.data;
       });
   };
 
 export const createQoutationServices =
-  projectData => (dispatch /* , getState */) => {
-    return axiosInstance('post', '/project/quotation/services', projectData)
-      .then(res => res.data)
-      .then(res => {
+  (projectData) => (dispatch /* , getState */) => {
+    return axiosInstance("post", "/project/quotation/services", projectData)
+      .then((res) => res.data)
+      .then((res) => {
         if (res.success) {
           dispatch({
             type: projectActionType.MERGE_PROJECT_SERVICES,
-            data: res.data
+            data: res.data,
           });
         }
         return res.success;
       })
-      .catch(err => {
+      .catch((err) => {
         return err.response.data;
       });
   };
 
 export const showQoutationToClient =
-  projectData => (dispatch /* , getState */) => {
+  (projectData) => (dispatch /* , getState */) => {
     const { projectId, project_qoutation_detail_id } = projectData;
     return axiosInstance(
-      'put',
+      "put",
       `/project/quotation/${projectId}/${project_qoutation_detail_id}/show`
     )
-      .then(res => res.data)
-      .then(res => {
+      .then((res) => res.data)
+      .then((res) => {
         if (res.success) {
           dispatch({
             type: projectActionType.MERGE_PROJECT_QOUTATION,
-            data: res.data
+            data: res.data,
           });
         }
         return res.success;
       })
-      .catch(err => {
+      .catch((err) => {
         return err.response.data;
       });
   };
 
-export const finalizeQoutation = projectData => (dispatch /* , getState */) => {
-  const { projectId, project_qoutation_detail_id } = projectData;
-  return axiosInstance(
-    'put',
-    `/project/quotation/${projectId}/${project_qoutation_detail_id}/final`
-  )
-    .then(res => res.data)
-    .then(res => {
-      if (res.success) {
-        dispatch({
-          type: projectActionType.MERGE_PROJECT_QOUTATION,
-          data: res.data
-        });
-      }
-      return res.success;
-    })
-    .catch(err => {
-      return err.response.data;
-    });
-};
+export const finalizeQoutation =
+  (projectData) => (dispatch /* , getState */) => {
+    const { projectId, project_qoutation_detail_id } = projectData;
+    return axiosInstance(
+      "put",
+      `/project/quotation/${projectId}/${project_qoutation_detail_id}/final`
+    )
+      .then((res) => res.data)
+      .then((res) => {
+        if (res.success) {
+          dispatch({
+            type: projectActionType.MERGE_PROJECT_QOUTATION,
+            data: res.data,
+          });
+        }
+        return res.success;
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
+  };
 
 export const getProjectAsAdmin = () => (dispatch, getState) => {
-  return axiosInstance('get', '/project/fetch/admin')
-    .then(res => res.data)
-    .then(res => {
+  return axiosInstance("get", "/project/fetch/admin")
+    .then((res) => res.data)
+    .then((res) => {
       if (res.success) {
         dispatch({
           type: projectActionType.MERGE_PROJECT_LIST,
-          data: res.data
+          data: res.data,
         });
       }
     });
 };
 
 export const getProjects = () => (dispatch, getState) => {
-  return axiosInstance('get', '/project/fetch')
-    .then(res => res.data)
-    .then(res => {
+  return axiosInstance("get", "/project/fetch")
+    .then((res) => res.data)
+    .then((res) => {
       if (res.success) {
         dispatch({
           type: projectActionType.MERGE_PROJECT_LIST,
-          data: res.data
+          data: res.data,
         });
       }
     });
 };
 
 export const assignEmployee = (projectId, userId) => (dispatch, getState) => {
-  return axiosInstance('put', `/project/employee/assign/${projectId}`, {
-    userId
+  return axiosInstance("put", `/project/employee/assign/${projectId}`, {
+    userId,
   })
-    .then(res => res.data)
-    .then(res => {
+    .then((res) => res.data)
+    .then((res) => {
       if (res.success) {
         dispatch({
           type: projectActionType.MERGE_PROJECT_DETAILS,
-          projectDetails: res.projectDetails
+          projectDetails: res.projectDetails,
         });
       }
     });
 };
 
-export const getProjectsDetails = projectId => (dispatch, getState) => {
-  return axiosInstance('get', `/project/fetch/${projectId}`)
-    .then(res => res.data)
-    .then(res => {
+export const getProjectsDetails = (projectId) => (dispatch, getState) => {
+  return axiosInstance("get", `/project/fetch/${projectId}`)
+    .then((res) => res.data)
+    .then((res) => {
       if (res.success) {
         dispatch({ type: projectActionType.RESET_PROJECT });
         const {
           projectDetails,
           projectFiles,
           projectComments,
-          projectQuotation
+          projectQuotation,
         } = res;
         dispatch({
           type: projectActionType.MERGE_PROJECT,
           projectDetails,
           projectFiles,
           projectComments,
-          projectQuotation
+          projectQuotation,
         });
       }
     });

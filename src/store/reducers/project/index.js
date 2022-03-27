@@ -1,10 +1,11 @@
-import { projectActionType } from '../../constants/actionType';
+import { projectActionType } from "../../constants/actionType";
 
 const initialState = {
   projectDetails: {},
   projectFiles: [],
   projectQuotation: {},
-  projectComments: []
+  projectComments: [],
+  projectStatus: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,28 +15,28 @@ const reducer = (state = initialState, action) => {
         projectDetails,
         projectFiles,
         projectComments,
-        projectQuotation
+        projectQuotation,
       } = action;
       return {
         ...state,
         projectDetails,
         projectFiles,
         projectComments,
-        projectQuotation
+        projectQuotation,
       };
     case projectActionType.MERGE_PROJECT_COMMENT:
       return { ...state, projectComments: action.projectComments };
     case projectActionType.MERGE_PROJECT_SERVICES:
       return {
         ...state,
-        projectQuotation: { ...state.projectQuotation, services: action.data }
+        projectQuotation: { ...state.projectQuotation, services: action.data },
       };
     case projectActionType.MERGE_PROJECT_QOUTATION:
       return { ...state, projectQuotation: action.data };
     case projectActionType.MERGE_PROJECT_DETAILS:
       return {
         ...state,
-        projectDetails: { ...action.projectDetails }
+        projectDetails: { ...action.projectDetails },
       };
     case projectActionType.RESET_PROJECT:
       return initialState;
