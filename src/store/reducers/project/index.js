@@ -16,6 +16,7 @@ const reducer = (state = initialState, action) => {
         projectFiles,
         projectComments,
         projectQuotation,
+        projectStatus,
       } = action;
       return {
         ...state,
@@ -23,6 +24,7 @@ const reducer = (state = initialState, action) => {
         projectFiles,
         projectComments,
         projectQuotation,
+        projectStatus,
       };
     case projectActionType.MERGE_PROJECT_COMMENT:
       return { ...state, projectComments: action.projectComments };

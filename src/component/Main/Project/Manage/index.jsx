@@ -15,6 +15,7 @@ import {
   getProjectsDetails,
   createProjectComment,
   fetchServices,
+  fetchProjectStatus,
   createQoutationDetails,
   createQoutationServices,
   finalizeQoutation,
@@ -39,6 +40,7 @@ const ManageModule = (props) => {
     assignEmployee,
     project,
     getProjectsDetails,
+    fetchProjectStatus,
     user_level_acc,
     usersList,
     createProjectComment,
@@ -55,6 +57,7 @@ const ManageModule = (props) => {
   const [projectFiles, setProjectFiles] = useState([]);
   const [projectComments, setProjectComments] = useState([]);
   const [projectQuotation, setProjectQuotation] = useState([]);
+  const [projectStatus, setProjectStatus] = useState([]);
 
   const [showCreateQuotation, setShowCreateQuotation] = useState(false);
   const [showUpdateQuotation, setShowUpdateQuotation] = useState(false);
@@ -81,6 +84,7 @@ const ManageModule = (props) => {
       setProjectFiles(project.projectFiles);
       setProjectComments(project.projectComments);
       setProjectQuotation(project.projectQuotation);
+      setProjectStatus(project.projectStatus);
     } else {
       getProjectsDetails(projectId).then(() => {
         setIsLoaded(true);
@@ -434,6 +438,8 @@ const ManageModule = (props) => {
             user_level_acc={user_level_acc}
             createProjectStatus={createProjectStatus}
             projectId={projectDetails.project_id}
+            fetchProjectStatus={fetchProjectStatus}
+            projectStatus={projectStatus}
           />
         </>
       ) : (
@@ -459,6 +465,7 @@ const mapDispatchToProps = (dispatch) => {
     createProjectStatus: (projectId, remarks, statusId) =>
       dispatch(createProjectStatus(projectId, remarks, statusId)),
     getProjectsDetails: (projectId) => dispatch(getProjectsDetails(projectId)),
+    fetchProjectStatus: (projectId) => dispatch(fetchProjectStatus(projectId)),
     createProjectComment: (commentData) =>
       dispatch(createProjectComment(commentData)),
     createQoutationDetails: (projectData) =>

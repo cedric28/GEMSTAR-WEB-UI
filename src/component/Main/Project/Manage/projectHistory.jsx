@@ -21,13 +21,14 @@ const customTheme = {
 };
 
 const ProjectHistory = (props) => {
-  const { user_level_acc, createProjectStatus, projectId } = props;
+  const { user_level_acc, createProjectStatus, projectId, projectStatus } =
+    props;
   const [values, setValues] = useState({
     statusId: 3,
     remarks: "",
   });
 
-  console.log({ values });
+  console.log({ projectStatus });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ const ProjectHistory = (props) => {
       {user_level_acc === "emp" && (
         <Fragment>
           <Card.Title className="mt-4 px-2 pb-2 border-bottom">
-            Employee Assignment
+            Tracking Details
           </Card.Title>
           <Row className="mx-2">
             <Col>
@@ -96,25 +97,22 @@ const ProjectHistory = (props) => {
       <Row className="mx-2">
         <Col>
           <Timeline theme={customTheme} dateFormat="only-number">
-            <Container>
-              <YearContent startDate="2020/07/01" />
-              <BodyContent>
-                <Section title="Title">
-                  <Description text="Description" />
-                  <Description text="Another description" />
-                </Section>
-              </BodyContent>
-            </Container>
-
-            <Container>
-              <YearContent startDate={Date.now()} />
-              <BodyContent>
-                <Section title="Title">
-                  <Description text="Description" />
-                  <Description text="Another description" />
-                </Section>
-              </BodyContent>
-            </Container>
+            {projectStatus.map((res) => {
+              return (
+                <Container>
+                  <YearContent startDate={res.date_created} />
+                  <BodyContent>
+                    <Section title={res.status_name}>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: res.remarks,
+                        }}
+                      />
+                    </Section>
+                  </BodyContent>
+                </Container>
+              );
+            })}
           </Timeline>
         </Col>
       </Row>

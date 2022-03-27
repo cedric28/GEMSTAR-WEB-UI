@@ -15,6 +15,20 @@ export const createProject = (projectData) => (dispatch /* , getState */) => {
     });
 };
 
+export const fetchProjectStatus = (projectId) => {
+  return axiosInstance("get", `/project/${projectId}/status/fetch`)
+    .then((res) => res.data)
+    .then((res) => {
+      // if (res.success) {
+      //   dispatch({ type: servicesActionType.MERGE_SERVICES, data: res.data });
+      // }
+      return res.success;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+};
+
 export const createProjectStatus = (projectId, statusId, remarks) => {
   return axiosInstance("post", `/project/status/${projectId}/create`, {
     remarks,
@@ -182,6 +196,7 @@ export const getProjectsDetails = (projectId) => (dispatch, getState) => {
           projectFiles,
           projectComments,
           projectQuotation,
+          projectStatus,
         } = res;
         dispatch({
           type: projectActionType.MERGE_PROJECT,
@@ -189,6 +204,7 @@ export const getProjectsDetails = (projectId) => (dispatch, getState) => {
           projectFiles,
           projectComments,
           projectQuotation,
+          projectStatus,
         });
       }
     });
