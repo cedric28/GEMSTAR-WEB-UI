@@ -5,7 +5,6 @@ import {
   YearContent,
   BodyContent,
   Section,
-  Description,
 } from "vertical-timeline-component-react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import RichTextBox from "../../../UI/RichTextBox";
@@ -28,20 +27,9 @@ const ProjectHistory = (props) => {
     remarks: "",
   });
 
-  console.log({ projectStatus });
-
   const handleSubmit = (e) => {
     e.preventDefault();
     createProjectStatus(projectId, values.statusId, values.remarks);
-    // createProjectComment({
-    //   projectId,
-    //   comment_content: values.comment_content.replace(
-    //     /<p>/g,
-    //     `<p class="mb-0">`
-    //   ),
-    // }).then((ret) => {
-    //   setValues({ ...values, comment_content: "" });
-    // });
   };
 
   const handleSelectChange = (e) => {

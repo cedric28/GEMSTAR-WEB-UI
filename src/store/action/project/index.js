@@ -15,36 +15,45 @@ export const createProject = (projectData) => (dispatch /* , getState */) => {
     });
 };
 
-export const fetchProjectStatus = (projectId) => {
-  return axiosInstance("get", `/project/${projectId}/status/fetch`)
-    .then((res) => res.data)
-    .then((res) => {
-      // if (res.success) {
-      //   dispatch({ type: servicesActionType.MERGE_SERVICES, data: res.data });
-      // }
-      return res.success;
-    })
-    .catch((err) => {
-      return err.response.data;
-    });
-};
+export const fetchProjectStatus =
+  (projectId) => (dispatch /* , getState */) => {
+    return axiosInstance("get", `/project/${projectId}/status/fetch`)
+      .then((res) => res.data)
+      .then((res) => {
+        if (res.success) {
+          console.log({ data: res.data });
+          dispatch({
+            type: projectActionType.MERGE_PROJECT_STATUS_LIST,
+            data: res.data,
+          });
+        }
+        return res.success;
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
+  };
 
-export const createProjectStatus = (projectId, statusId, remarks) => {
-  return axiosInstance("post", `/project/status/${projectId}/create`, {
-    remarks,
-    statusId,
-  })
-    .then((res) => res.data)
-    .then((res) => {
-      // if (res.success) {
-      //   dispatch({ type: servicesActionType.MERGE_SERVICES, data: res.data });
-      // }
-      return res.success;
+export const createProjectStatus =
+  (projectId, statusId, remarks) => (dispatch /* , getState */) => {
+    return axiosInstance("post", `/project/status/${projectId}/create`, {
+      remarks,
+      statusId,
     })
-    .catch((err) => {
-      return err.response.data;
-    });
-};
+      .then((res) => res.data)
+      .then((res) => {
+        if (res.success) {
+          dispatch({
+            type: projectActionType.MERGE_PROJECT_STATUS_LIST,
+            data: res.data,
+          });
+        }
+        return res.success;
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
+  };
 
 export const createProjectComment =
   (projectData) => (dispatch /* , getState */) => {

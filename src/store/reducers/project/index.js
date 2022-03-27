@@ -40,6 +40,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         projectDetails: { ...action.projectDetails },
       };
+    case projectActionType.MERGE_PROJECT_STATUS_LIST:
+      return {
+        ...state,
+        projectStatus: action.data,
+      };
     case projectActionType.RESET_PROJECT:
       return initialState;
     default:

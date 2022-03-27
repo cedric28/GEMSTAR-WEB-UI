@@ -96,6 +96,7 @@ const ManageModule = (props) => {
     project.projectComments,
     project.projectFiles,
     project.projectQuotation,
+    project.projectStatus,
     projectId,
     isLoaded,
   ]);
