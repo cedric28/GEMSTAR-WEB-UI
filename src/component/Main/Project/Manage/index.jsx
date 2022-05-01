@@ -197,7 +197,6 @@ const ManageModule = (props) => {
               <>
                 {quotationStatusReturn.viewBillingInvoice()}
                 {quotationStatusReturn.viewSaleInvoice()}
-                {quotationStatusReturn.viewOfficialReceipt()}
               </>
             ) : (
               quotationStatusReturn.updateQoutation()
@@ -213,7 +212,6 @@ const ManageModule = (props) => {
                 <>
                   {quotationStatusReturn.viewBillingInvoice()}
                   {quotationStatusReturn.viewSaleInvoice()}
-                  {quotationStatusReturn.viewOfficialReceipt()}
                 </>
               ) : (
                 <>{quotationStatusReturn.accept()}</>
