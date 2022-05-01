@@ -31,7 +31,7 @@ const UpdateQuotation = (props) => {
     services,
     projectId,
     projectQuotation,
-    showQoutationToClient,
+    showQuotationToClient,
   } = props;
 
   const [values, setValues] = useState({
@@ -103,7 +103,7 @@ const UpdateQuotation = (props) => {
   };
 
   const handleShowClient = () => {
-    showQoutationToClient({
+    showQuotationToClient({
       projectId,
       project_qoutation_detail_id: projectQuotation.project_qoutation_detail_id,
     }).then(() => {
@@ -375,7 +375,7 @@ const UpdateQuotation = (props) => {
             Close
           </Button>
           {projectQuotation && projectQuotation.is_show === 1 ? (
-            <div className="border py-2 px-3">Qoutation shown</div>
+            <div className="border py-2 px-3">Quotation shown</div>
           ) : (
             <Button variant="primary" onClick={handleShowClient}>
               Show Client

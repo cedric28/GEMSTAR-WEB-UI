@@ -18,8 +18,8 @@ import {
   fetchProjectStatus,
   createQuotationDetails,
   createQuotationServices,
-  finalizeQoutation,
-  showQoutationToClient,
+  finalizeQuotation,
+  showQuotationToClient,
   getEmployeeList,
   createProjectStatus,
 } from "../../../../store/action";
@@ -48,8 +48,8 @@ const ManageModule = (props) => {
     createQuotationServices,
     createProjectStatus,
     fetchServices,
-    finalizeQoutation,
-    showQoutationToClient,
+    finalizeQuotation,
+    showQuotationToClient,
     getEmployeeList,
     services,
   } = props;
@@ -107,7 +107,7 @@ const ManageModule = (props) => {
         className="my-3 mx-1"
         variant="success"
         onClick={() =>
-          finalizeQoutation({
+          finalizeQuotation({
             projectId,
             project_qoutation_detail_id:
               projectQuotation.project_qoutation_detail_id,
@@ -177,7 +177,7 @@ const ManageModule = (props) => {
         variant="primary"
         onClick={() => setShowOfficialReceipt(true)}
       >
-        View Official Receipt
+        View Receipt
       </Button>
     ),
     notCreated: () => (
@@ -245,7 +245,7 @@ const ManageModule = (props) => {
         services={services}
         projectId={projectId}
         createQuotationServices={createQuotationServices}
-        showQoutationToClient={showQoutationToClient}
+        showQuotationToClient={showQuotationToClient}
         projectQuotation={projectQuotation}
         show={showUpdateQuotation}
         handleClose={() => setShowUpdateQuotation(false)}
@@ -473,10 +473,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(createQuotationDetails(projectData)),
     createQuotationServices: (projectData) =>
       dispatch(createQuotationServices(projectData)),
-    finalizeQoutation: (projectData) =>
-      dispatch(finalizeQoutation(projectData)),
-    showQoutationToClient: (projectData) =>
-      dispatch(showQoutationToClient(projectData)),
+    finalizeQuotation: (projectData) =>
+      dispatch(finalizeQuotation(projectData)),
+    showQuotationToClient: (projectData) =>
+      dispatch(showQuotationToClient(projectData)),
     fetchServices: () => dispatch(fetchServices()),
     getEmployeeList: () => dispatch(getEmployeeList()),
   };

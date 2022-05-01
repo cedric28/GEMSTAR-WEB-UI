@@ -1,8 +1,8 @@
-import React from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
-import logo from '../../../../../assets/LandingPageImages/logo.png';
-import LabelAndText from '../../../../UI/LabelAndText';
-import './index.css';
+import React from "react";
+import { Form, Row, Col } from "react-bootstrap";
+import logo from "../../../../../assets/LandingPageImages/logo.png";
+import LabelAndText from "../../../../UI/LabelAndText";
+import "./index.css";
 
 const RightForms = () => {
   // <Col md={8} xs={12}>
@@ -27,7 +27,7 @@ const RightForms = () => {
 
       <Row className="mt-2 px-4">
         <Form.Group as={Col} controlId="formGridCustomer">
-          <h5>OFFICIAL RECEIPT</h5>
+          <h5>RECEIPT</h5>
         </Form.Group>
 
         <Col>
@@ -58,7 +58,7 @@ const RightForms = () => {
           type="text"
         />
         <Form.Label className="text-nowrap m-0 align-self-center">
-          {' '}
+          {" "}
           (P)
         </Form.Label>
         <Form.Control

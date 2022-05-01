@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
-import { Button, Row, Container, Modal } from 'react-bootstrap';
-import ReactToPrint from 'react-to-print';
+import React, { useRef } from "react";
+import { Button, Row, Container, Modal } from "react-bootstrap";
+import ReactToPrint from "react-to-print";
 
-import RightForms from './RightForms';
+import RightForms from "./RightForms";
 
-const Official = props => {
+const Official = (props) => {
   const { handleClose, show } = props;
   const ref = useRef();
 
@@ -19,8 +19,8 @@ const Official = props => {
             <Row>
               <p className="mt-4">
                 <center>
-                  THIS OFFICIAL RECEIPT SHALL BE VALID FOR FIVE (5) YEARS FROM
-                  THE DATE OF ATP
+                  THIS RECEIPT SHALL BE VALID FOR FIVE (5) YEARS FROM THE DATE
+                  OF ATP
                 </center>
               </p>
             </Row>

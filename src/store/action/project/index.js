@@ -109,7 +109,7 @@ export const createQuotationServices =
       });
   };
 
-export const showQoutationToClient =
+export const showQuotationToClient =
   (projectData) => (dispatch /* , getState */) => {
     const { projectId, project_qoutation_detail_id } = projectData;
     return axiosInstance(
@@ -131,7 +131,7 @@ export const showQoutationToClient =
       });
   };
 
-export const finalizeQoutation =
+export const finalizeQuotation =
   (projectData) => (dispatch /* , getState */) => {
     const { projectId, project_qoutation_detail_id } = projectData;
     return axiosInstance(
