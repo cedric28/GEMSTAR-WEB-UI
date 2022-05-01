@@ -179,6 +179,19 @@ export const getProjects = () => (dispatch, getState) => {
     });
 };
 
+export const getProjectsTable = () => (dispatch, getState) => {
+  return axiosInstance("get", "/project/fetch/list")
+    .then((res) => res.data)
+    .then((res) => {
+      if (res.success) {
+        dispatch({
+          type: projectActionType.MERGE_PROJECT_LIST,
+          data: res.data,
+        });
+      }
+    });
+};
+
 export const assignEmployee = (projectId, userId) => (dispatch, getState) => {
   return axiosInstance("put", `/project/employee/assign/${projectId}`, {
     userId,
