@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Form,
@@ -9,38 +9,38 @@ import {
   Col,
   OverlayTrigger,
   Popover,
-  Table
-} from 'react-bootstrap';
-import { toast } from 'react-toastify';
+  Table,
+} from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const defaultId = {
-  project_qoutation_id: '',
-  project_qoutation_detail_id: '',
+  project_qoutation_id: "",
+  project_qoutation_detail_id: "",
   quantity: 0,
-  unit: 'pcs',
-  services_name: '',
+  unit: "pcs",
+  services_name: "",
   unit_price: 0,
-  price: 0
+  price: 0,
 };
 
-const UpdateQuotation = props => {
+const UpdateQuotation = (props) => {
   const {
     handleClose,
     show,
-    createQoutationServices,
+    createQuotationServices,
     services,
     projectId,
     projectQuotation,
-    showQoutationToClient
+    showQoutationToClient,
   } = props;
 
   const [values, setValues] = useState({
-    quantity: '',
-    unit: 'pcs',
-    services_id: '',
-    services_name: '',
-    unit_price: '',
-    price: 0
+    quantity: "",
+    unit: "pcs",
+    services_id: "",
+    services_name: "",
+    unit_price: "",
+    price: 0,
   });
   const [toUpdate, setToUpdate] = useState(defaultId);
 
@@ -48,11 +48,11 @@ const UpdateQuotation = props => {
     const initialValue = {
       declared: [],
       undeclared: [],
-      placeHolderbaba: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      placeHolderbaba: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     };
     if (projectQuotation.services && projectQuotation.services.length > 0) {
       return projectQuotation.services.reduce((acc, cur) => {
-        if (cur.services_id === 'others') {
+        if (cur.services_id === "others") {
           acc.placeHolderbaba.pop();
           return { ...acc, undeclared: [...acc.undeclared, cur] };
         } else {
@@ -76,28 +76,28 @@ const UpdateQuotation = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.quantity, values.unit_price]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleSelectChange = e => {
+  const handleSelectChange = (e) => {
     const { value } = e.target;
-    if (value === 'others') {
+    if (value === "others") {
       setValues({
         ...values,
         services_id: value,
-        services_name: ''
+        services_name: "",
       });
     } else {
-      const newVal = value.split('+++');
+      const newVal = value.split("+++");
       setValues({
         ...values,
         services_id: newVal[0],
-        services_name: newVal[1]
+        services_name: newVal[1],
       });
     }
   };
@@ -105,41 +105,41 @@ const UpdateQuotation = props => {
   const handleShowClient = () => {
     showQoutationToClient({
       projectId,
-      project_qoutation_detail_id: projectQuotation.project_qoutation_detail_id
+      project_qoutation_detail_id: projectQuotation.project_qoutation_detail_id,
     }).then(() => {
-      toast.success('Qoutation Done!', {
-        position: toast.POSITION.TOP_CENTER
+      toast.success("Quotation Done!", {
+        position: toast.POSITION.TOP_CENTER,
       });
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      values.quantity === '' ||
+      values.quantity === "" ||
       values.quantity === 0 ||
-      values.unit === '' ||
-      values.services_id === '' ||
-      values.services_name === '' ||
-      values.unit_price === '' ||
+      values.unit === "" ||
+      values.services_id === "" ||
+      values.services_name === "" ||
+      values.unit_price === "" ||
       values.unit_price === 0
     ) {
-      toast.error('Please complete necessary details !', {
-        position: toast.POSITION.TOP_CENTER
+      toast.error("Please complete necessary details !", {
+        position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      createQoutationServices({
+      createQuotationServices({
         ...values,
         project_qoutation_detail_id:
-          projectQuotation.project_qoutation_detail_id
-      }).then(res => {
+          projectQuotation.project_qoutation_detail_id,
+      }).then((res) => {
         if (res.success) {
-          toast.success('Services added Successfully', {
-            position: toast.POSITION.TOP_CENTER
+          toast.success("Services added Successfully", {
+            position: toast.POSITION.TOP_CENTER,
           });
         } else {
           toast.error(res.message, {
-            position: toast.POSITION.TOP_CENTER
+            position: toast.POSITION.TOP_CENTER,
           });
         }
       });
@@ -153,7 +153,8 @@ const UpdateQuotation = props => {
         size="xl"
         onHide={handleClose}
         backdrop="static"
-        keyboard={false}>
+        keyboard={false}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Update Quotation</Modal.Title>
         </Modal.Header>
@@ -164,7 +165,8 @@ const UpdateQuotation = props => {
                 <Form.Group
                   as={Col}
                   className="mb-2 col-12 col-md-6"
-                  controlId="formBasicFirstName">
+                  controlId="formBasicFirstName"
+                >
                   <Form.Label className="mb-0">Quantity: </Form.Label>
                   <Form.Control
                     type="number"
@@ -179,7 +181,8 @@ const UpdateQuotation = props => {
                 <Form.Group
                   as={Col}
                   className="mb-2 col-12 col-md-6"
-                  controlId="formBasicFirstName">
+                  controlId="formBasicFirstName"
+                >
                   <Form.Label className="mb-0">Unit:</Form.Label>
                   <Form.Control
                     type="text"
@@ -194,39 +197,43 @@ const UpdateQuotation = props => {
                 <Form.Group
                   as={Col}
                   className={`mb-2 ${
-                    values.services_id === 'others'
-                      ? 'col-12 col-md-6'
-                      : 'col-12'
+                    values.services_id === "others"
+                      ? "col-12 col-md-6"
+                      : "col-12"
                   }`}
-                  controlId="formBasicFirstName">
+                  controlId="formBasicFirstName"
+                >
                   <Form.Label className="mb-0">Services: </Form.Label>
                   <Form.Select
                     defaultValue="0"
                     onChange={handleSelectChange}
-                    required>
+                    required
+                  >
                     <option key={`opt-0`} value="0" disabled>
                       Select Services
                     </option>
                     {services.length > 0
-                      ? services.map(res => {
+                      ? services.map((res) => {
                           return (
                             <option
                               key={`opt-${res.services_id}`}
-                              value={`${res.services_id}+++${res.services_name}`}>
+                              value={`${res.services_id}+++${res.services_name}`}
+                            >
                               {res.services_name}
                             </option>
                           );
                         })
-                      : ''}
+                      : ""}
                     <option value="others">others</option>
                   </Form.Select>
                 </Form.Group>
 
-                {values.services_id === 'others' ? (
+                {values.services_id === "others" ? (
                   <Form.Group
                     as={Col}
                     className="mb-2 col-12 col-md-6"
-                    controlId="formBasicFirstName">
+                    controlId="formBasicFirstName"
+                  >
                     <Form.Label className="mb-0">
                       Enter other service:
                     </Form.Label>
@@ -240,13 +247,14 @@ const UpdateQuotation = props => {
                     />
                   </Form.Group>
                 ) : (
-                  ''
+                  ""
                 )}
 
                 <Form.Group
                   as={Col}
                   className="mb-2 col-12 col-md-6"
-                  controlId="formBasicFirstName">
+                  controlId="formBasicFirstName"
+                >
                   <Form.Label className="mb-0">Unit Price:</Form.Label>
                   <Form.Control
                     type="number"
@@ -261,7 +269,8 @@ const UpdateQuotation = props => {
                 <Form.Group
                   as={Col}
                   className="mb-2 col-12 col-md-6"
-                  controlId="formBasicFirstName">
+                  controlId="formBasicFirstName"
+                >
                   <Form.Label className="mb-0">Amount:</Form.Label>
                   <Form.Control
                     type="text"
@@ -312,11 +321,12 @@ const UpdateQuotation = props => {
                                 overlay={
                                   <Popover id="popover-basic">
                                     <Popover.Body>
-                                      And here's some <strong>amazing</strong>{' '}
+                                      And here's some <strong>amazing</strong>{" "}
                                       content. It's very engaging. right?
                                     </Popover.Body>
                                   </Popover>
-                                }>
+                                }
+                              >
                                 <i className="fas fa-ellipsis-v" />
                               </OverlayTrigger>
                             </td>
@@ -341,7 +351,8 @@ const UpdateQuotation = props => {
                         return (
                           <tr
                             key={`upt-undec-${index}`}
-                            className="text-center">
+                            className="text-center"
+                          >
                             <td>{res.quantity}</td>
                             <td>{res.unit}</td>
                             <td className="text-start">{res.services_name}</td>
@@ -353,7 +364,7 @@ const UpdateQuotation = props => {
                     </tbody>
                   </Table>
                 ) : (
-                  'No Services'
+                  "No Services"
                 )}
               </Col>
             </Row>

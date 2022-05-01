@@ -16,8 +16,8 @@ import {
   createProjectComment,
   fetchServices,
   fetchProjectStatus,
-  createQoutationDetails,
-  createQoutationServices,
+  createQuotationDetails,
+  createQuotationServices,
   finalizeQoutation,
   showQoutationToClient,
   getEmployeeList,
@@ -44,8 +44,8 @@ const ManageModule = (props) => {
     user_level_acc,
     usersList,
     createProjectComment,
-    createQoutationDetails,
-    createQoutationServices,
+    createQuotationDetails,
+    createQuotationServices,
     createProjectStatus,
     fetchServices,
     finalizeQoutation,
@@ -101,7 +101,7 @@ const ManageModule = (props) => {
     isLoaded,
   ]);
 
-  const qoutationStatusReturn = {
+  const quotationStatusReturn = {
     accept: () => (
       <Button
         className="my-3 mx-1"
@@ -192,15 +192,15 @@ const ManageModule = (props) => {
       if (user_level_acc === "owner") {
         return (
           <>
-            {qoutationStatusReturn.viewQoutation()}
+            {quotationStatusReturn.viewQoutation()}
             {projectQuotation.is_final === 1 ? (
               <>
-                {qoutationStatusReturn.viewBillingInvoice()}
-                {qoutationStatusReturn.viewSaleInvoice()}
-                {qoutationStatusReturn.viewOfficialReceipt()}
+                {quotationStatusReturn.viewBillingInvoice()}
+                {quotationStatusReturn.viewSaleInvoice()}
+                {quotationStatusReturn.viewOfficialReceipt()}
               </>
             ) : (
-              qoutationStatusReturn.updateQoutation()
+              quotationStatusReturn.updateQoutation()
             )}
           </>
         );
@@ -208,26 +208,26 @@ const ManageModule = (props) => {
         if (projectQuotation.is_show === 1) {
           return (
             <>
-              {qoutationStatusReturn.viewQoutation()}
+              {quotationStatusReturn.viewQoutation()}
               {projectQuotation.is_final === 1 ? (
                 <>
-                  {qoutationStatusReturn.viewBillingInvoice()}
-                  {qoutationStatusReturn.viewSaleInvoice()}
-                  {qoutationStatusReturn.viewOfficialReceipt()}
+                  {quotationStatusReturn.viewBillingInvoice()}
+                  {quotationStatusReturn.viewSaleInvoice()}
+                  {quotationStatusReturn.viewOfficialReceipt()}
                 </>
               ) : (
-                <>{qoutationStatusReturn.accept()}</>
+                <>{quotationStatusReturn.accept()}</>
               )}
             </>
           );
         }
-        return qoutationStatusReturn.notCreated();
+        return quotationStatusReturn.notCreated();
       }
     } else {
       if (user_level_acc === "owner") {
-        return qoutationStatusReturn.createQuotation();
+        return quotationStatusReturn.createQuotation();
       } else {
-        return qoutationStatusReturn.notCreated();
+        return quotationStatusReturn.notCreated();
       }
     }
   };
@@ -236,7 +236,7 @@ const ManageModule = (props) => {
     <MainBody>
       <CreateQuotation
         projectDetails={projectDetails}
-        createQoutationDetails={createQoutationDetails}
+        createQuotationDetails={createQuotationDetails}
         projectId={projectId}
         show={showCreateQuotation}
         handleClose={() => setShowCreateQuotation(false)}
@@ -244,7 +244,7 @@ const ManageModule = (props) => {
       <UpdateQuotation
         services={services}
         projectId={projectId}
-        createQoutationServices={createQoutationServices}
+        createQuotationServices={createQuotationServices}
         showQoutationToClient={showQoutationToClient}
         projectQuotation={projectQuotation}
         show={showUpdateQuotation}
@@ -469,10 +469,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchProjectStatus: (projectId) => dispatch(fetchProjectStatus(projectId)),
     createProjectComment: (commentData) =>
       dispatch(createProjectComment(commentData)),
-    createQoutationDetails: (projectData) =>
-      dispatch(createQoutationDetails(projectData)),
-    createQoutationServices: (projectData) =>
-      dispatch(createQoutationServices(projectData)),
+    createQuotationDetails: (projectData) =>
+      dispatch(createQuotationDetails(projectData)),
+    createQuotationServices: (projectData) =>
+      dispatch(createQuotationServices(projectData)),
     finalizeQoutation: (projectData) =>
       dispatch(finalizeQoutation(projectData)),
     showQoutationToClient: (projectData) =>

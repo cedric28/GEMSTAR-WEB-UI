@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         projectQuotation: { ...state.projectQuotation, services: action.data },
       };
-    case projectActionType.MERGE_PROJECT_QOUTATION:
+    case projectActionType.MERGE_PROJECT_QUOTATION:
       return { ...state, projectQuotation: action.data };
     case projectActionType.MERGE_PROJECT_DETAILS:
       return {

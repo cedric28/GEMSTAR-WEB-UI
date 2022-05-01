@@ -1,55 +1,55 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
 
-const CreateQuotation = props => {
+const CreateQuotation = (props) => {
   const {
     handleClose,
     show,
-    createQoutationDetails,
+    createQuotationDetails,
     projectId,
-    projectDetails
+    projectDetails,
   } = props;
 
   const [values, setValues] = useState({
-    customer: '',
-    address: '',
-    engine_model: '',
-    serial_number: ''
+    customer: "",
+    address: "",
+    engine_model: "",
+    serial_number: "",
   });
 
   useEffect(() => {
     setValues({
       ...values,
       customer: `${projectDetails.last_name}, ${projectDetails.first_name}`,
-      address: projectDetails.address
+      address: projectDetails.address,
     });
   }, [projectDetails]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      values.customer === '' &&
-      values.address === '' &&
-      values.engine_model === '' &&
-      values.serial_number === ''
+      values.customer === "" &&
+      values.address === "" &&
+      values.engine_model === "" &&
+      values.serial_number === ""
     ) {
-      toast.error('Error Notification !', {
-        position: toast.POSITION.TOP_LEFT
+      toast.error("Error Notification !", {
+        position: toast.POSITION.TOP_LEFT,
       });
     } else {
-      createQoutationDetails({ ...values, projectId }).then(() => {
-        toast.success('Qoutation Successfully Created!', {
-          position: toast.POSITION.TOP_CENTER
+      createQuotationDetails({ ...values, projectId }).then(() => {
+        toast.success("Quotation Successfully Created!", {
+          position: toast.POSITION.TOP_CENTER,
         });
         handleClose();
       });
@@ -63,7 +63,8 @@ const CreateQuotation = props => {
         size="lg"
         onHide={handleClose}
         backdrop="static"
-        keyboard={false}>
+        keyboard={false}
+      >
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <Modal.Header closeButton>
             <Modal.Title>Create Quotation</Modal.Title>

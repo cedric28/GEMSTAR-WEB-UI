@@ -73,14 +73,14 @@ export const createProjectComment =
       });
   };
 
-export const createQoutationDetails =
+export const createQuotationDetails =
   (projectData) => (dispatch /* , getState */) => {
     return axiosInstance("post", "/project/qoutation/detail", projectData)
       .then((res) => res.data)
       .then((res) => {
         if (res.success) {
           dispatch({
-            type: projectActionType.MERGE_PROJECT_QOUTATION,
+            type: projectActionType.MERGE_PROJECT_QUOTATION,
             data: res.data,
           });
         }
@@ -91,7 +91,7 @@ export const createQoutationDetails =
       });
   };
 
-export const createQoutationServices =
+export const createQuotationServices =
   (projectData) => (dispatch /* , getState */) => {
     return axiosInstance("post", "/project/quotation/services", projectData)
       .then((res) => res.data)
@@ -120,7 +120,7 @@ export const showQoutationToClient =
       .then((res) => {
         if (res.success) {
           dispatch({
-            type: projectActionType.MERGE_PROJECT_QOUTATION,
+            type: projectActionType.MERGE_PROJECT_QUOTATION,
             data: res.data,
           });
         }
@@ -142,7 +142,7 @@ export const finalizeQoutation =
       .then((res) => {
         if (res.success) {
           dispatch({
-            type: projectActionType.MERGE_PROJECT_QOUTATION,
+            type: projectActionType.MERGE_PROJECT_QUOTATION,
             data: res.data,
           });
         }
