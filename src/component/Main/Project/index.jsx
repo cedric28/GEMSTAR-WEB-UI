@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Badge, Row, Col } from "react-bootstrap";
+import { Button, Card, Badge, Row, Col, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -9,10 +9,19 @@ import {
   getProjects,
   getProjectsTable,
 } from "../../../store/action";
-import { dateFormatDistance } from "../../Shared/Helpers/dateFormat";
+import {
+  dateFormatDistance,
+  dateFormatting,
+} from "../../Shared/Helpers/dateFormat";
 
 const Projects = (props) => {
-  const { getProjectAsAdmin, getProjects, projectList, user_level_acc } = props;
+  const {
+    getProjectAsAdmin,
+    getProjects,
+    projectList,
+    user_level_acc,
+    getProjectsTable,
+  } = props;
   const fetchProjects =
     user_level_acc === "owner"
       ? getProjectAsAdmin
@@ -21,13 +30,17 @@ const Projects = (props) => {
       : getProjects;
 
   const [isTable, setIsTable] = useState(false);
-  console.log({ isTable });
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (isTable) {
+      getProjectsTable();
+    } else {
+      fetchProjects();
+    }
+  }, [isTable]);
 
   const CardList = () => {
-    return Object.keys(projectList).length > 0 ? (
+    return Object.keys(projectList).length > 0 &&
+      projectList[0].project_description ? (
       <Row>
         {Object.keys(projectList).map((res, index) => {
           return (
@@ -88,47 +101,86 @@ const Projects = (props) => {
     );
   };
 
+  const TableComponent = () => {
+    return (
+      <Table bordered hover>
+        <thead>
+          <tr className="text-center">
+            <th>Project Name</th>
+            <th>Client Name</th>
+            <th>Engine Model</th>
+            <th>Status</th>
+            <th>Date Range</th>
+            <th>Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projectList.length > 0 && projectList[0].total_price
+            ? projectList.map((res) => {
+                return (
+                  <tr>
+                    <td>
+                      <Link to={`/manage/${res.project_id}`}>
+                        {res.project_name}
+                      </Link>
+                    </td>
+                    <td>{`${res.last_name}, ${res.first_name}`}</td>
+                    <td>{res.engine_model || ""}</td>
+                    <td className={`text-center text-${res.status_acr}`}>
+                      {res.status_name}
+                    </td>
+                    <td className="text-center">
+                      {dateFormatting(res.start_date, "mdy")} -{" "}
+                      {dateFormatting(res.end_date, "mdy")}
+                    </td>
+                    <td className="text-center">{res.total_price}</td>
+                  </tr>
+                );
+              })
+            : ""}
+        </tbody>
+      </Table>
+    );
+  };
+
   return (
     <MainBody>
       <Row>
         <Col className="border-bottom mb-3 d-flex justify-content-between">
           <Card.Title className="ms-2">Projects</Card.Title>
-          {user_level_acc === "owner" && (
-            <div className="d-flex align-items-start">
-              <Button
-                variant="secondary"
-                className="me-2 p-1"
-                size="sm"
-                onClick={() => setIsTable(true)}
-              >
-                <i class="fas fa-list" />
-              </Button>
-              <Button
-                variant="secondary"
-                className="p-1"
-                size="sm"
-                onClick={() => setIsTable(false)}
-              >
-                <i class="fab fa-buromobelexperte" />
-              </Button>
-            </div>
-          )}
-        </Col>
-      </Row>
-      {user_level_acc === "csm" ? (
-        <Row>
-          <Col>
-            <div class="d-flex justify-content-end mb-2">
+          <div className="d-flex align-items-start mb-2">
+            {user_level_acc === "owner" && (
+              <React.Fragment>
+                <Button
+                  variant="secondary"
+                  className="me-2 p-1"
+                  size="sm"
+                  onClick={() => setIsTable(true)}
+                >
+                  <i class="fas fa-list" />
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="p-1"
+                  size="sm"
+                  onClick={() => setIsTable(false)}
+                >
+                  <i class="fab fa-buromobelexperte" />
+                </Button>
+              </React.Fragment>
+            )}
+            {user_level_acc === "csm" ? (
               <Link to={`/create`}>
                 <Button variant="primary">Create Project</Button>
               </Link>
-            </div>
-          </Col>
-        </Row>
-      ) : (
-        ""
-      )}
-      <CardList />
+            ) : (
+              ""
+            )}
+          </div>
+        </Col>
+      </Row>
+
+      {!isTable ? <CardList /> : <TableComponent />}
     </MainBody>
   );
 };
