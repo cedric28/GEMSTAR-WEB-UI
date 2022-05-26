@@ -4,7 +4,7 @@ import { axiosInstance } from '../../util/axios';
 export const isAuthenticated =
   (userType = 'Costumer') =>
   (dispatch, getState) => {
-    return axiosInstance('get', '/auth/authenticated')
+    return axiosInstance('get', 'auth/authenticated')
       .then(res => res.data)
       .then(res => {
         if (res.success) {
@@ -21,7 +21,7 @@ export const isAuthenticated =
   };
 
 export const registerUser = userData => (dispatch /* , getState */) => {
-  return axiosInstance('post', '/auth/register', userData)
+  return axiosInstance('post', 'auth/register', userData)
     .then(res => {
       dispatch({
         type: authUserActionType.REGISTER_USER
@@ -34,7 +34,7 @@ export const registerUser = userData => (dispatch /* , getState */) => {
 };
 
 export const loginUser = userData => (dispatch /* , getState */) => {
-  return axiosInstance('post', '/auth/login', userData)
+  return axiosInstance('post', 'auth/login', userData)
     .then(res => res.data)
     .then(res => {
       dispatch({
@@ -59,13 +59,13 @@ export const usersDynamicUpdate =
       fieldName,
       value: newValue
     };
-    return axiosInstance('put', '/auth/dynamic', userData).then(res => {
+    return axiosInstance('put', 'auth/dynamic', userData).then(res => {
       console.log(res);
     });
   };
 
 export const logout = () => (dispatch /* getState */) => {
-  return axiosInstance('get', '/auth/logout').then(() => {
+  return axiosInstance('get', 'auth/logout').then(() => {
     dispatch({
       type: authUserActionType.UNSET_AUTHENTICATED
     });
@@ -79,7 +79,7 @@ export const getEmployeeList = () => (dispatch /* getState */) => {
   dispatch({
     type: authUserActionType.RESET_USER_LIST
   });
-  return axiosInstance('get', '/auth/employee')
+  return axiosInstance('get', 'auth/employee')
     .then(res => res.data)
     .then(res => {
       dispatch({
@@ -93,7 +93,7 @@ export const getAllUserList = () => (dispatch /* getState */) => {
   dispatch({
     type: authUserActionType.RESET_USER_LIST
   });
-  return axiosInstance('get', '/auth/all')
+  return axiosInstance('get', 'auth/all')
     .then(res => res.data)
     .then(res => {
       dispatch({
@@ -107,7 +107,7 @@ export const getUserData = userId => (dispatch /* getState */) => {
   dispatch({
     type: authUserActionType.RESET_USER_DATA
   });
-  return axiosInstance('get', `/auth/${userId}`)
+  return axiosInstance('get', `auth/${userId}`)
     .then(res => res.data)
     .then(res => {
       dispatch({
