@@ -5,7 +5,7 @@ export const FetchNotification = () => (dispatch /* getState */) => {
   dispatch({
     type: notificationActionType.RESET_NOTIFICATION_LIST
   });
-  return axiosInstance('get', '/notif')
+  return axiosInstance('get', 'notif')
     .then(res => res.data)
     .then(res => {
       const { success, ...rest } = res;
@@ -24,7 +24,7 @@ export const DismissNotification =
     dispatch({
       type: notificationActionType.RESET_NOTIFICATION_LIST
     });
-    return axiosInstance('put', '/notif/dismiss', { notificationId })
+    return axiosInstance('put', 'notif/dismiss', { notificationId })
       .then(res => res.data)
       .then(res => {
         dispatch({
