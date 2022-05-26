@@ -2,7 +2,7 @@ import { appActionType } from '../../constants/actionType';
 import { axiosInstance } from '../../util/axios';
 
 export const fetchLogs = data => (dispatch /* , getState */) => {
-  return axiosInstance('get', '/app/logs/fetch', data)
+  return axiosInstance('get', 'app/logs/fetch', data)
     .then(res => res.data)
     .then(res => {
       const { success, ...rest } = res;
