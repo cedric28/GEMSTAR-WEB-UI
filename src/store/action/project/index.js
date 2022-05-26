@@ -2,7 +2,7 @@ import { projectActionType } from "../../constants/actionType";
 import { axiosInstance } from "../../util/axios";
 
 export const createProject = (projectData) => (dispatch /* , getState */) => {
-  return axiosInstance("post", "/project/create", projectData)
+  return axiosInstance("post", "project/create", projectData)
     .then((res) => res.data)
     .then((res) => {
       // if (res.success) {
@@ -17,7 +17,7 @@ export const createProject = (projectData) => (dispatch /* , getState */) => {
 
 export const fetchProjectStatus =
   (projectId) => (dispatch /* , getState */) => {
-    return axiosInstance("get", `/project/${projectId}/status/fetch`)
+    return axiosInstance("get", `project/${projectId}/status/fetch`)
       .then((res) => res.data)
       .then((res) => {
         if (res.success) {
@@ -36,7 +36,7 @@ export const fetchProjectStatus =
 
 export const createProjectStatus =
   (projectId, statusId, remarks) => (dispatch /* , getState */) => {
-    return axiosInstance("post", `/project/status/${projectId}/create`, {
+    return axiosInstance("post", `project/status/${projectId}/create`, {
       remarks,
       statusId,
     })
@@ -57,7 +57,7 @@ export const createProjectStatus =
 
 export const createProjectComment =
   (projectData) => (dispatch /* , getState */) => {
-    return axiosInstance("post", "/project/comment/create", projectData)
+    return axiosInstance("post", "project/comment/create", projectData)
       .then((res) => res.data)
       .then((res) => {
         if (res.success) {
@@ -75,7 +75,7 @@ export const createProjectComment =
 
 export const createQuotationDetails =
   (projectData) => (dispatch /* , getState */) => {
-    return axiosInstance("post", "/project/qoutation/detail", projectData)
+    return axiosInstance("post", "project/qoutation/detail", projectData)
       .then((res) => res.data)
       .then((res) => {
         if (res.success) {
@@ -93,7 +93,7 @@ export const createQuotationDetails =
 
 export const createQuotationServices =
   (projectData) => (dispatch /* , getState */) => {
-    return axiosInstance("post", "/project/quotation/services", projectData)
+    return axiosInstance("post", "project/quotation/services", projectData)
       .then((res) => res.data)
       .then((res) => {
         if (res.success) {
@@ -114,7 +114,7 @@ export const showQuotationToClient =
     const { projectId, project_qoutation_detail_id } = projectData;
     return axiosInstance(
       "put",
-      `/project/quotation/${projectId}/${project_qoutation_detail_id}/show`
+      `project/quotation/${projectId}/${project_qoutation_detail_id}/show`
     )
       .then((res) => res.data)
       .then((res) => {
@@ -136,7 +136,7 @@ export const finalizeQuotation =
     const { projectId, project_qoutation_detail_id } = projectData;
     return axiosInstance(
       "put",
-      `/project/quotation/${projectId}/${project_qoutation_detail_id}/final`
+      `project/quotation/${projectId}/${project_qoutation_detail_id}/final`
     )
       .then((res) => res.data)
       .then((res) => {
@@ -154,7 +154,7 @@ export const finalizeQuotation =
   };
 
 export const getProjectAsAdmin = () => (dispatch, getState) => {
-  return axiosInstance("get", "/project/fetch/admin")
+  return axiosInstance("get", "project/fetch/admin")
     .then((res) => res.data)
     .then((res) => {
       if (res.success) {
@@ -167,7 +167,7 @@ export const getProjectAsAdmin = () => (dispatch, getState) => {
 };
 
 export const getProjects = () => (dispatch, getState) => {
-  return axiosInstance("get", "/project/fetch")
+  return axiosInstance("get", "project/fetch")
     .then((res) => res.data)
     .then((res) => {
       if (res.success) {
@@ -180,7 +180,7 @@ export const getProjects = () => (dispatch, getState) => {
 };
 
 export const getProjectsTable = () => (dispatch, getState) => {
-  return axiosInstance("get", "/project/fetch/list")
+  return axiosInstance("get", "project/fetch/list")
     .then((res) => res.data)
     .then((res) => {
       if (res.success) {
@@ -193,7 +193,7 @@ export const getProjectsTable = () => (dispatch, getState) => {
 };
 
 export const assignEmployee = (projectId, userId) => (dispatch, getState) => {
-  return axiosInstance("put", `/project/employee/assign/${projectId}`, {
+  return axiosInstance("put", `project/employee/assign/${projectId}`, {
     userId,
   })
     .then((res) => res.data)
@@ -208,7 +208,7 @@ export const assignEmployee = (projectId, userId) => (dispatch, getState) => {
 };
 
 export const getProjectsDetails = (projectId) => (dispatch, getState) => {
-  return axiosInstance("get", `/project/fetch/${projectId}`)
+  return axiosInstance("get", `project/fetch/${projectId}`)
     .then((res) => res.data)
     .then((res) => {
       if (res.success) {
